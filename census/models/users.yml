@@ -1,0 +1,18 @@
+---
+model:users:
+  name: Users
+  query: |-
+    SELECT * FROM (
+      SELECT 1 as "id.dd" UNION ALL
+      SELECT 2 as "id.dd" UNION ALL
+      SELECT 3 as "id.dd" UNION ALL
+      SELECT 4 as "id.dd" UNION ALL
+      SELECT 5 as "id.dd" UNION ALL
+      SELECT 6 as "id.dd" UNION ALL
+      SELECT 7 as "id.dd" UNION ALL
+      SELECT 8 as "id.dd" UNION ALL
+      SELECT 9 as "id.dd" UNION ALL
+      SELECT 10 as "id.dd"
+    ) as ct
+  description:
+  connection: data_warehouse:snowflake-iq48949-okay-to-test

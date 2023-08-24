@@ -1,0 +1,10 @@
+---
+model:opportunities:
+  name: Opportunities
+  query: |-
+    Select ACCOUNT_NAME, ACCOUNT_ID, MAX(AMOUNT) as opp_amount
+    FROM  "CHOLULA"."PRODUCTION"."CRM_OPPORTUNITIES" opp
+    WHERE opportunity_type = 'New Business'
+    GROUP BY ACCOUNT_NAME, ACCOUNT_ID
+  description:
+  connection: data_warehouse:snowflake-ak23255-census-official-avoid-modifying

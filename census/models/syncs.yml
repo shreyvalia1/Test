@@ -1,0 +1,9 @@
+---
+model:syncs:
+  name: Syncs
+  query: |-
+    SELECT *
+    FROM cholula.production.organizations AS orgs
+    LEFT JOIN cholula.production.SYNC_CONFIGURATION_DETAILS AS sync_configs ON sync_configs.organization_id= orgs.id
+  description:
+  connection: data_warehouse:snowflake-ak23255-census-official-avoid-modifying

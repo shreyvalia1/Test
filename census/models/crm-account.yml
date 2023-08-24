@@ -1,0 +1,45 @@
+---
+model:crm-account:
+  name: CRM Account
+  query: |-
+    SELECT
+      CRM.Account_name as name,
+      ORG.plan_tier_name as Plan,
+      floor((ORG.ruby_today_arr+99)/100)*100 as ARR,
+      COALESCE(NULLIF(ORG.CUSTOMER_SUCCESS_MANAGER,''), '?') as CSM,
+      COALESCE(NULLIF(ORG.SALES_OWNER,''), '?') as AE,
+      IFF(ARR > 0, 0, floor((OPPS.max+99)/100)*100) as Max,
+      syncs.first_sync as fsync,
+      syncs.last_sync as lsync,
+      segment.first_segment as fsegment,
+      cast(ORG.created_at AS DATE) as joined
+    FROM cholula.production.crm_accounts as CRM
+    LEFT JOIN cholula.production.organizations as ORG ON (ORG.Account_ID = CRM.ID)
+
+    LEFT JOIN (
+      SELECT Account_ID, MAX(AMOUNT) as max
+      FROM cholula.production.crm_opportunities
+      WHERE opportunity_type = 'New Business'
+      GROUP BY Account_ID
+      ) AS OPPS ON (OPPS.Account_ID = CRM.ID)
+
+    LEFT JOIN (
+      SELECT orgs.account_id as aid, CAST(min(syncs.created_at) AS DATE) as first_sync, CAST(max(syncs.created_at) AS DATE) as last_sync
+      FROM cholula.production.organizations AS orgs
+      LEFT JOIN cholula.production.sync_run_summaries AS syncs ON syncs.organization_id = orgs.id
+      LEFT JOIN cholula.production.DIM_WAREHOUSE_SOURCES AS source ON syncs.source_id = source.id
+      WHERE syncs.status = 'completed'
+      AND source.source_entity_type IN ('CohortSource', 'FilterSegmentSource')
+    GROUP BY aid
+    ) AS Syncs ON (Syncs.aid = CRM.ID)
+
+    LEFT JOIN (
+      SELECT orgs.account_id as aid, CAST(min(segments.created_at) AS DATE) as first_segment
+      FROM cholula.production.organizations AS orgs
+      LEFT JOIN cholula.production.FILTER_SEGMENT_DETAILS AS segments ON segments.organization_id = orgs.id
+      GROUP BY aid
+    ) AS Segment ON (Segment.aid = CRM.ID)
+
+    WHERE ARR > 0 OR Max > 0
+  description:
+  connection: data_warehouse:snowflake-ak23255-census-official-avoid-modifying
