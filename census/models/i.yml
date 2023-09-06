@@ -1,0 +1,6 @@
+---
+model:i:
+  name: i
+  query: SELECT 8 as id
+  description:
+  connection: data_warehouse:snowflake-iq48949-okay-to-test
