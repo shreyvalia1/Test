@@ -2,7 +2,7 @@
 model:opportunities:
   name: Opportunities
   query: |-
-    Select ACCOUNT_NAME, ACCOUNT_ID, MAX(AMOUNT) as opp_amount, (1,2,3,4,5) as arr_for_testing
+    Select ACCOUNT_NAME, ACCOUNT_ID, MAX(AMOUNT) as opp_amount, [1,2,3,4,5] as arr_for_testing
     FROM  "CHOLULA"."PRODUCTION"."CRM_OPPORTUNITIES" opp
     WHERE opportunity_type = 'New Business'
     GROUP BY ACCOUNT_NAME, ACCOUNT_ID
