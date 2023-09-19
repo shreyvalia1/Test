@@ -1,9 +1,6 @@
 ---
 model:syncs:
   name: Syncs
-  query: |-
-    SELECT *, [1,2,4] as sync_array
-    FROM cholula.production.organizations AS orgs
-    LEFT JOIN cholula.production.SYNC_CONFIGURATION_DETAILS AS sync_configs ON sync_configs.organization_id= orgs.id
+  query: SELECT [1,2,4] as sync_array, 1 as sync_id
   description:
   connection: data_warehouse:snowflake-ak23255-census-official-avoid-modifying
