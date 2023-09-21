@@ -1,0 +1,24 @@
+---
+model:events:
+  name: Events
+  query: |-
+    WITH generated_events AS (
+      SELECT
+          UNIFORM(1, 1000000000000, RANDOM()) AS order_id,
+          o_custkey AS customer_id,
+          o_totalprice AS price,
+          o_orderpriority AS priority,
+          DATEADD('month', -3, TIMESTAMP_FROM_PARTS(TO_DATE('2021-' || DATE_PART(month, o_orderdate) || '-' || LEAST(28,DATE_PART(day, o_orderdate))), TO_TIME(TO_VARCHAR(UNIFORM(0, 86400, RANDOM()))))) AS order_time
+      FROM "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF10"."ORDERS"
+      LIMIT 100000 -- Snowflake maxes out at 15M
+    )
+
+
+    SELECT
+        *,
+        'New Order' AS event_name,
+        OBJECT_CONSTRUCT('price', price, 'priority', priority) AS event_properties
+    FROM generated_events
+    LIMIT 300
+  description:
+  connection: data_warehouse:snowflake-ak23255-census-official-avoid-modifying
