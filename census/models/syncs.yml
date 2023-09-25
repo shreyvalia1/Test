@@ -1,6 +1,0 @@
----
-model:syncs:
-  name: Syncs
-  query: SELECT [1,2,4] as sync_array, 1 as sync_id
-  description:
-  connection: data_warehouse:snowflake-ak23255-census-official-avoid-modifying
