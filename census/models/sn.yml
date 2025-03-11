@@ -1,6 +1,0 @@
----
-model:sn:
-  name: sn
-  query: SELECT 1 AS id, 'Planet Express'::text AS company_name
-  description:
-  connection: data_warehouse:snowflake-iq48949-okay-to-test

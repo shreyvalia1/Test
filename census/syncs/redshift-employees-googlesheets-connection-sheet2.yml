@@ -1,0 +1,37 @@
+---
+sync:redshift-employees-googlesheets-connection-sheet2:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+    name_normalization: match_source_names
+    order_by: alphabetical_column_name
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: destination:google-sheets
+    object_identifier: '{"spreadsheet_id":"1m7UcOX8BEfubSdfiYA2DrZHb2EGr54bVU9DAyJghtdI","sheet_id":0}'
+  source:
+    type: cohort
+    connection_identifier: data_warehouse:redshift
+    object_identifier: cohort:treatment
+  mappings: []
+  advanced_configuration:
+    input_value_mode: true
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75

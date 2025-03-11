@@ -1,0 +1,9 @@
+---
+dataset:1-person:
+  type: sql
+  name: 1 person
+  query: Select 1 as id, 'shrey' as first_name, 'valia' as last_name, 'shrey.valia@getcensus.com'
+    as email
+  description:
+  icon:
+  connection: data_warehouse:databricks

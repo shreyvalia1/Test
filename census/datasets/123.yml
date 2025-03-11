@@ -1,0 +1,8 @@
+---
+dataset:123:
+  type: sql
+  name: '123'
+  query: select 1 as id, 2 as idTwo
+  description:
+  icon:
+  connection: data_warehouse:snowflake-ak23255-census-official-avoid-modifying

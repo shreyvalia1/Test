@@ -1,0 +1,8 @@
+---
+dataset:users:
+  type: sql
+  name: Users
+  query: Select * from demo.demo.users
+  description:
+  icon:
+  connection: data_warehouse:redshift

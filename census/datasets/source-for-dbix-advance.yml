@@ -1,0 +1,11 @@
+---
+dataset:source-for-dbix-advance:
+  type: sql
+  name: source for dbix advance
+  query: |-
+    select 1 as id, 'shrey' as first_name, 123 as phone_number UNION ALL
+    select 2 as id, 'john' as first_name, 456 as phone_number UNION ALL
+    select 3 as id, 'shrey' as first_name, 789 as phone_number
+  description:
+  icon:
+  connection: data_warehouse:databricks

@@ -1,0 +1,53 @@
+---
+sync:googlesheets-sheet1-linkedin-connection-company-list:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: destination:linkedin
+    object_identifier: company
+  source:
+    type: table
+    connection_identifier: data_warehouse:googlesheets
+    table_catalog: google_sheets
+    table_schema: 1m7UcOX8BEfubSdfiYA2DrZHb2EGr54bVU9DAyJghtdI
+    table_name: Sheet1
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: email
+    to:
+      field_name: companyName
+    is_primary_identifier: true
+  - from:
+      type: constant
+      data:
+        basic_type: text
+        value: '31672976'
+    to:
+      field_name: segment_id
+      lookup_object:
+        object_identifier: company_segment
+        field_to_match_by: id
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

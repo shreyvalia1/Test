@@ -1,8 +1,0 @@
----
-model:companies:
-  name: Companies
-  query: |-
-    SELECT *, [5,6,7,8] as arr_on_compnies, CAST(created_at AS DATE) date, COALESCE(NULLIF(CUSTOMER_SUCCESS_MANAGER,''), '?') as Contact, COALESCE(NULLIF(SALES_OWNER,''), '?') as SALES_CONTACT
-    FROM cholula.production.organizations
-  description:
-  connection: data_warehouse:snowflake-ak23255-census-official-avoid-modifying

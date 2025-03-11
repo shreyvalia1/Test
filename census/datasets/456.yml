@@ -1,0 +1,8 @@
+---
+dataset:456:
+  type: sql
+  name: '456'
+  query: select 1 as joinId
+  description:
+  icon:
+  connection: data_warehouse:snowflake-ak23255-census-official-avoid-modifying

@@ -1,0 +1,9 @@
+---
+dataset:atehna:
+  type: sql
+  name: atehna
+  query: SELECT 1 as id,  TIMESTAMP '2023-09-26 12:30:00' as datetime_column, CAST('2022-12-05'
+    AS DATE) as date_col
+  description:
+  icon:
+  connection: data_warehouse:amazon-athena-shared-dev-connection

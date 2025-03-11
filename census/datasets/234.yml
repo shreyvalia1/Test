@@ -1,0 +1,8 @@
+---
+dataset:234:
+  type: sql
+  name: '234'
+  query: SELECT * FROM `census`.`DATASET_LATEST_RESOLUTION_36CE20DE_58AF_414D_B2D0_94F7F102559F`
+  description:
+  icon:
+  connection: data_warehouse:databricks

@@ -1,0 +1,10 @@
+---
+dataset:postgres1:
+  type: sql
+  name: postgres1
+  query: 'select 1 as "ID", ''john'' as "NAME", false as "BOOLY"
+
+    '
+  description:
+  icon:
+  connection: data_warehouse:postgres

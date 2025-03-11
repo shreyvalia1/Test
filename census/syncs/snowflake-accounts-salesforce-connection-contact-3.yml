@@ -1,0 +1,60 @@
+---
+sync:snowflake-accounts-salesforce-connection-contact-3:
+  paused: false
+  behavior:
+    operation: upsert
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: destination:brad-developer-salesforce
+    object_identifier: Contact
+  source:
+    type: table
+    connection_identifier: data_warehouse:snowflake-ak23255-census-official-avoid-modifying
+    table_catalog: CHOLULA
+    table_schema: PRODUCTION
+    table_name: ACCOUNTS
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: DOMAIN
+    to:
+      field_name: Email
+    is_primary_identifier: true
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: LAST_OPEN_JOB_NAMES
+    to:
+      field_name: LastName
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: UNIQUE_ID
+    to:
+      field_name: Census_ID__c
+    preserve_values: false
+  advanced_configuration:
+    bulk_id_lookup: true
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

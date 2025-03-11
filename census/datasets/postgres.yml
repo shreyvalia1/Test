@@ -1,0 +1,8 @@
+---
+dataset:postgres:
+  type: sql
+  name: postgres
+  query: select 1 as "ID", 'john' as "NAME", false as "BOOLY"
+  description:
+  icon:
+  connection: data_warehouse:tembo

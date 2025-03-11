@@ -1,0 +1,8 @@
+---
+dataset:2:
+  type: sql
+  name: '2'
+  query: SELECT * FROM `census`.`DATASET_LATEST_RESOLUTION_73F6F23C_17CC_453C_B0F4_33594B5BE24E`
+  description:
+  icon:
+  connection: data_warehouse:databricks

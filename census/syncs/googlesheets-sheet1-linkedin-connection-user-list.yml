@@ -1,0 +1,53 @@
+---
+sync:googlesheets-sheet1-linkedin-connection-user-list:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: destination:linkedin
+    object_identifier: user
+  source:
+    type: table
+    connection_identifier: data_warehouse:googlesheets
+    table_catalog: google_sheets
+    table_schema: 1m7UcOX8BEfubSdfiYA2DrZHb2EGr54bVU9DAyJghtdI
+    table_name: Sheet1
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: email
+    to:
+      field_name: email
+    is_primary_identifier: true
+  - from:
+      type: constant
+      data:
+        basic_type: text
+        value: Userlist 1
+    to:
+      field_name: segment_id
+      lookup_object:
+        object_identifier: user_segment
+        field_to_match_by: name
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

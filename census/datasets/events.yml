@@ -1,0 +1,10 @@
+---
+dataset:events:
+  type: sql
+  name: events
+  query: |-
+    select *
+    from "demo".events
+  description:
+  icon:
+  connection: data_warehouse:redshift

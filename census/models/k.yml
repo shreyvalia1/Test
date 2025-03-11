@@ -1,6 +1,0 @@
----
-model:k:
-  name: K
-  query: SELECT 10 as id
-  description:
-  connection: data_warehouse:snowflake-iq48949-okay-to-test
